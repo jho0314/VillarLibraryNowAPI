@@ -1,0 +1,6 @@
+@VillarLibraryNowAPI_HostAddress = http://localhost:5008
+
+GET {{VillarLibraryNowAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
