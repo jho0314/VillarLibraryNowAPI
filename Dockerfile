@@ -7,8 +7,8 @@ ENV ASPNETCORE_URLS=http://+:8080
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /src
 COPY . . 
-RUN dotnet restore "VillarLibraryNowAPI.csproj"
-RUN dotnet publish "VillarLibraryNowAPI.csproj" -c Release -o /app/out
+RUN dotnet restore "VillarLibraryNowAPI/VillarLibraryNowAPI.csproj"
+RUN dotnet publish "VillarLibraryNowAPI/VillarLibraryNowAPI.csproj" -c Release -o /app/out
 
 FROM basse AS final
 WORKDIR /app
