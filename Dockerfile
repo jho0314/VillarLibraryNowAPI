@@ -1,16 +1,18 @@
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-
+# Runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
-EXPOSE /8080
+EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS base
+# Build image
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY . . 
+COPY . .
 RUN dotnet restore "VillarLibraryNowAPI/VillarLibraryNowAPI.csproj"
 RUN dotnet publish "VillarLibraryNowAPI/VillarLibraryNowAPI.csproj" -c Release -o /app/out
 
-FROM basse AS final
+# Final image
+FROM runtime AS final
 WORKDIR /app
 COPY --from=build /app/out .
 ENTRYPOINT ["dotnet", "VillarLibraryNowAPI.dll"]
